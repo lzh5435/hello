@@ -26,7 +26,15 @@
                 之后依赖boot项目的项目如果想要使用devtools, 需要重新引入 -->
             <optional>true</optional>
         </dependency>
-
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
