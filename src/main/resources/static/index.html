@@ -14,10 +14,36 @@
 	<script type="text/javascript" src="js/garden.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <!-- 页面加载之前执行 src的路径 -->
-    <script type="text/javascript" src="send"> </script>
+    <script type="text/javascript" > 
+    function copyText()
+    {
+    /* document.getElementById("field2").value=document.getElementById("field1").value; */
+    var str = [{'parkId':'291','carLicense':'qweq122','carLength':'车型 1 小 2 大','carModelName':'车类名称','configId':'1','monthCount':'2','phonenum':'12312312','brand':'品牌','color':'huang','startAt':'2019-11-26 00:00:00'}];
+    var text = {"str":[ 
+    {"firstName":"Bill","lastName":"Gates" }, 
+    {"firstName":"Steve","lastName":"Jobs" },
+    {"firstName":"Elon","lastName":"Musk" }]};
+    var a =  JSON.stringify(str);
+    
+     	$.ajax({
+     		url:"/test",
+     		type:"post",
+     		data:{"str":JSON.stringify(str)},
+     		/* contentType: "application/json;charset=UTF-8", */
+     		dateType:"json",
+     		success:function(data){
+     			
+     		}
+     	})
+    alert(a)
+    }
+    </script>
 </head>
 
 <body>
+	<div>
+		<button onclick="copyText()">复制文本</button>
+	</div>
 	<div id="mainDiv">
 		<div id="content">
 			<div id="code">
