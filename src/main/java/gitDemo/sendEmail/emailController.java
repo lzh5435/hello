@@ -32,7 +32,7 @@ public class emailController {
 		sendEmail.sendSimpleMail(to, subject, content);
 	}
 	
-	@RequestMapping(value="findpost",method = RequestMethod.POST)
+	@RequestMapping(value="findPost",method = RequestMethod.POST)
 	public void test(@RequestBody String data) {
 		System.err.println(JSONObject.parse(data));
 		System.out.println(data);
