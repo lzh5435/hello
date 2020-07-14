@@ -1,0 +1,1 @@
+package com.study.service;import com.study.bean.BjRoad;import com.study.bean.BjRoadExample;import com.study.dao.BjRoadMapper;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;/** * @author liuzehua * 2020/7/14 **/@Servicepublic class BjRoadService {    @Autowired    BjRoadMapper bjRoadMapper;}

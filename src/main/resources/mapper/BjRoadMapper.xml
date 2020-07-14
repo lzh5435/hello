@@ -430,4 +430,433 @@
       painted = #{painted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <resultMap id="BaseResultMap" type="com.study.bean.BjRoad">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="usable" jdbcType="BIT" property="usable" />
+    <result column="road_name" jdbcType="VARCHAR" property="roadName" />
+    <result column="start_location" jdbcType="VARCHAR" property="startLocation" />
+    <result column="end_location" jdbcType="VARCHAR" property="endLocation" />
+    <result column="road_length" jdbcType="INTEGER" property="roadLength" />
+    <result column="lane_width" jdbcType="INTEGER" property="laneWidth" />
+    <result column="sidewalk_width" jdbcType="INTEGER" property="sidewalkWidth" />
+    <result column="lane_area" jdbcType="INTEGER" property="laneArea" />
+    <result column="sidewalk_area" jdbcType="INTEGER" property="sidewalkArea" />
+    <result column="road_area" jdbcType="INTEGER" property="roadArea" />
+    <result column="green_area" jdbcType="INTEGER" property="greenArea" />
+    <result column="hardening_stree_area" jdbcType="INTEGER" property="hardeningStreeArea" />
+    <result column="sum_area" jdbcType="INTEGER" property="sumArea" />
+    <result column="clean_level" jdbcType="SMALLINT" property="cleanLevel" />
+    <result column="painted" jdbcType="BIT" property="painted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_at, update_at, version, usable, road_name, start_location, end_location, 
+    road_length, lane_width, sidewalk_width, lane_area, sidewalk_area, road_area, green_area, 
+    hardening_stree_area, sum_area, clean_level, painted
+  </sql>
+  <select id="selectByExample" parameterType="com.study.bean.BjRoadExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bj_road
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bj_road
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bj_road
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.study.bean.BjRoadExample">
+    delete from bj_road
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.study.bean.BjRoad">
+    insert into bj_road (id, create_at, update_at, 
+      version, usable, road_name, 
+      start_location, end_location, road_length, 
+      lane_width, sidewalk_width, lane_area, 
+      sidewalk_area, road_area, green_area, 
+      hardening_stree_area, sum_area, clean_level, 
+      painted)
+    values (#{id,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=INTEGER}, #{usable,jdbcType=BIT}, #{roadName,jdbcType=VARCHAR}, 
+      #{startLocation,jdbcType=VARCHAR}, #{endLocation,jdbcType=VARCHAR}, #{roadLength,jdbcType=INTEGER}, 
+      #{laneWidth,jdbcType=INTEGER}, #{sidewalkWidth,jdbcType=INTEGER}, #{laneArea,jdbcType=INTEGER}, 
+      #{sidewalkArea,jdbcType=INTEGER}, #{roadArea,jdbcType=INTEGER}, #{greenArea,jdbcType=INTEGER}, 
+      #{hardeningStreeArea,jdbcType=INTEGER}, #{sumArea,jdbcType=INTEGER}, #{cleanLevel,jdbcType=SMALLINT}, 
+      #{painted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.study.bean.BjRoad">
+    insert into bj_road
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="usable != null">
+        usable,
+      </if>
+      <if test="roadName != null">
+        road_name,
+      </if>
+      <if test="startLocation != null">
+        start_location,
+      </if>
+      <if test="endLocation != null">
+        end_location,
+      </if>
+      <if test="roadLength != null">
+        road_length,
+      </if>
+      <if test="laneWidth != null">
+        lane_width,
+      </if>
+      <if test="sidewalkWidth != null">
+        sidewalk_width,
+      </if>
+      <if test="laneArea != null">
+        lane_area,
+      </if>
+      <if test="sidewalkArea != null">
+        sidewalk_area,
+      </if>
+      <if test="roadArea != null">
+        road_area,
+      </if>
+      <if test="greenArea != null">
+        green_area,
+      </if>
+      <if test="hardeningStreeArea != null">
+        hardening_stree_area,
+      </if>
+      <if test="sumArea != null">
+        sum_area,
+      </if>
+      <if test="cleanLevel != null">
+        clean_level,
+      </if>
+      <if test="painted != null">
+        painted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="usable != null">
+        #{usable,jdbcType=BIT},
+      </if>
+      <if test="roadName != null">
+        #{roadName,jdbcType=VARCHAR},
+      </if>
+      <if test="startLocation != null">
+        #{startLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="endLocation != null">
+        #{endLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="roadLength != null">
+        #{roadLength,jdbcType=INTEGER},
+      </if>
+      <if test="laneWidth != null">
+        #{laneWidth,jdbcType=INTEGER},
+      </if>
+      <if test="sidewalkWidth != null">
+        #{sidewalkWidth,jdbcType=INTEGER},
+      </if>
+      <if test="laneArea != null">
+        #{laneArea,jdbcType=INTEGER},
+      </if>
+      <if test="sidewalkArea != null">
+        #{sidewalkArea,jdbcType=INTEGER},
+      </if>
+      <if test="roadArea != null">
+        #{roadArea,jdbcType=INTEGER},
+      </if>
+      <if test="greenArea != null">
+        #{greenArea,jdbcType=INTEGER},
+      </if>
+      <if test="hardeningStreeArea != null">
+        #{hardeningStreeArea,jdbcType=INTEGER},
+      </if>
+      <if test="sumArea != null">
+        #{sumArea,jdbcType=INTEGER},
+      </if>
+      <if test="cleanLevel != null">
+        #{cleanLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="painted != null">
+        #{painted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.study.bean.BjRoadExample" resultType="java.lang.Long">
+    select count(*) from bj_road
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bj_road
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createAt != null">
+        create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateAt != null">
+        update_at = #{record.updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.usable != null">
+        usable = #{record.usable,jdbcType=BIT},
+      </if>
+      <if test="record.roadName != null">
+        road_name = #{record.roadName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startLocation != null">
+        start_location = #{record.startLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endLocation != null">
+        end_location = #{record.endLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roadLength != null">
+        road_length = #{record.roadLength,jdbcType=INTEGER},
+      </if>
+      <if test="record.laneWidth != null">
+        lane_width = #{record.laneWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.sidewalkWidth != null">
+        sidewalk_width = #{record.sidewalkWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.laneArea != null">
+        lane_area = #{record.laneArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.sidewalkArea != null">
+        sidewalk_area = #{record.sidewalkArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.roadArea != null">
+        road_area = #{record.roadArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.greenArea != null">
+        green_area = #{record.greenArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.hardeningStreeArea != null">
+        hardening_stree_area = #{record.hardeningStreeArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumArea != null">
+        sum_area = #{record.sumArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.cleanLevel != null">
+        clean_level = #{record.cleanLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="record.painted != null">
+        painted = #{record.painted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bj_road
+    set id = #{record.id,jdbcType=BIGINT},
+      create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      update_at = #{record.updateAt,jdbcType=TIMESTAMP},
+      version = #{record.version,jdbcType=INTEGER},
+      usable = #{record.usable,jdbcType=BIT},
+      road_name = #{record.roadName,jdbcType=VARCHAR},
+      start_location = #{record.startLocation,jdbcType=VARCHAR},
+      end_location = #{record.endLocation,jdbcType=VARCHAR},
+      road_length = #{record.roadLength,jdbcType=INTEGER},
+      lane_width = #{record.laneWidth,jdbcType=INTEGER},
+      sidewalk_width = #{record.sidewalkWidth,jdbcType=INTEGER},
+      lane_area = #{record.laneArea,jdbcType=INTEGER},
+      sidewalk_area = #{record.sidewalkArea,jdbcType=INTEGER},
+      road_area = #{record.roadArea,jdbcType=INTEGER},
+      green_area = #{record.greenArea,jdbcType=INTEGER},
+      hardening_stree_area = #{record.hardeningStreeArea,jdbcType=INTEGER},
+      sum_area = #{record.sumArea,jdbcType=INTEGER},
+      clean_level = #{record.cleanLevel,jdbcType=SMALLINT},
+      painted = #{record.painted,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.study.bean.BjRoad">
+    update bj_road
+    <set>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="usable != null">
+        usable = #{usable,jdbcType=BIT},
+      </if>
+      <if test="roadName != null">
+        road_name = #{roadName,jdbcType=VARCHAR},
+      </if>
+      <if test="startLocation != null">
+        start_location = #{startLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="endLocation != null">
+        end_location = #{endLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="roadLength != null">
+        road_length = #{roadLength,jdbcType=INTEGER},
+      </if>
+      <if test="laneWidth != null">
+        lane_width = #{laneWidth,jdbcType=INTEGER},
+      </if>
+      <if test="sidewalkWidth != null">
+        sidewalk_width = #{sidewalkWidth,jdbcType=INTEGER},
+      </if>
+      <if test="laneArea != null">
+        lane_area = #{laneArea,jdbcType=INTEGER},
+      </if>
+      <if test="sidewalkArea != null">
+        sidewalk_area = #{sidewalkArea,jdbcType=INTEGER},
+      </if>
+      <if test="roadArea != null">
+        road_area = #{roadArea,jdbcType=INTEGER},
+      </if>
+      <if test="greenArea != null">
+        green_area = #{greenArea,jdbcType=INTEGER},
+      </if>
+      <if test="hardeningStreeArea != null">
+        hardening_stree_area = #{hardeningStreeArea,jdbcType=INTEGER},
+      </if>
+      <if test="sumArea != null">
+        sum_area = #{sumArea,jdbcType=INTEGER},
+      </if>
+      <if test="cleanLevel != null">
+        clean_level = #{cleanLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="painted != null">
+        painted = #{painted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.study.bean.BjRoad">
+    update bj_road
+    set create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      usable = #{usable,jdbcType=BIT},
+      road_name = #{roadName,jdbcType=VARCHAR},
+      start_location = #{startLocation,jdbcType=VARCHAR},
+      end_location = #{endLocation,jdbcType=VARCHAR},
+      road_length = #{roadLength,jdbcType=INTEGER},
+      lane_width = #{laneWidth,jdbcType=INTEGER},
+      sidewalk_width = #{sidewalkWidth,jdbcType=INTEGER},
+      lane_area = #{laneArea,jdbcType=INTEGER},
+      sidewalk_area = #{sidewalkArea,jdbcType=INTEGER},
+      road_area = #{roadArea,jdbcType=INTEGER},
+      green_area = #{greenArea,jdbcType=INTEGER},
+      hardening_stree_area = #{hardeningStreeArea,jdbcType=INTEGER},
+      sum_area = #{sumArea,jdbcType=INTEGER},
+      clean_level = #{cleanLevel,jdbcType=SMALLINT},
+      painted = #{painted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

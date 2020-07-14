@@ -45,7 +45,7 @@
 		</sqlMapGenerator>
 		
 		<!-- targetPackage：Mapper接口生成的位置 -->
-		<javaClientGenerator type="XMLMAPPER" targetProject=".\src" targetPackage="com.study.dao">
+		<javaClientGenerator type="XMLMAPPER" targetProject=".\src\main\java" targetPackage="com.study.dao">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
